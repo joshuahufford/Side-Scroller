@@ -1,20 +1,25 @@
 import kivy
 kivy.require('1.10.0')
-
 from kivy.app import App
-from kivy.uix.widget import Widget
-from kivy.uix.image import Image
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.floatlayout import FloatLayout
 
-class Picture(Image):
+class MainScreen(Screen):
 	pass
 
-class ScrollerGame(Widget):
-	def __init__(self):	
-		self.add_widget(Picture(source='assets/white_cloud.png'))
+class GameScreen(Screen):
+	pass
 
-class ScrollerApp(App):
+class ScreenManagement(ScreenManager):
+	pass
+
+
+mainkv = Builder.load_file("main.kv")
+
+class MainApp(App):
 	def build(self):
-		return ScrollerGame()
+		return mainkv
 
 if __name__ == '__main__':
-    ScrollerApp().run()
+    MainApp().run()

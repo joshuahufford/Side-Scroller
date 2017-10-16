@@ -11,6 +11,9 @@ class MainScreen(Screen):
 class GameScreen(Screen):
 	pass
 
+class SettingsScreen(Screen):
+	pass
+
 class ScreenManagement(ScreenManager):
 	pass
 

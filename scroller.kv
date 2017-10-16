@@ -1,19 +1,27 @@
 #:kivy 1.10.0
-#:import hex kivy.utils.get_color_from_hex
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
 
-<ScrollerGame>:
-	canvas:
-		Color:
-			rgba: hex('#87CEEB')
-		Rectangle:
-			size: self.size
-			pos: self.pos
+ScreenManagement:
+	transition: FadeTransition()
+	MainScreen:
+	GameScreen:
 
-<Picture>:
-	canvas:
-		Color:
-			rgb: (1,1,1)
-		Rectangle:
-			texture: self.texture
-			size: self.size
-			pos: self.pos
+<MainScreen>:
+	name: "main"
+	Image:
+		source: "assets/main_screen.png"
+		allow_stretch: True
+		keep_ratio: False
+		size: root.size
+		pos: self.pos
+	Button:
+		on_release: app.root.current = "game"
+		text: "Start"
+		background_color: [1,0,0,1]
+		color: 1,0,1,1
+		font_size: 60
+		size_hint: 0.3, 0.2
+		pos_hint: {'center_x': .5, 'center_y': .5}
+
+<GameScreen>:
+	name: "game"

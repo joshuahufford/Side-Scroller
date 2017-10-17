@@ -26,6 +26,3 @@ class MainApp(App):
 
 if __name__ == '__main__':
     MainApp().run()
-
-
-# Test

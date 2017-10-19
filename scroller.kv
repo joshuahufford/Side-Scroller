@@ -1,21 +1,15 @@
 #:kivy 1.10.0
-#:import FadeTransition kivy.uix.screenmanager.FadeTransition
 #:import utils kivy.utils
 
-ScreenManagement:
-	transition: FadeTransition()
-	MainScreen:
-	GameScreen:
-	SettingsScreen:
 
 <MainScreen>:
 	name: "main"
-	Image:
-		source: "assets/main_screen.png"
-		allow_stretch: True
-		keep_ratio: False
-		size: root.size
-		pos: self.pos
+	canvas:
+		Color:
+			rgba: 0,1,0,1
+		Rectangle:
+			pos: self.pos
+			size: self.size
 	Button:
 		on_release: app.root.current = "game"
 		text: "Start"
@@ -45,5 +39,9 @@ ScreenManagement:
 		source: "assets/level_1_ground.png"
 		size: root.size
 		pos_hint: {"center_x": 0.5, "center_y": 0}
+	Image: 
+		source: "assets/circle.png"
+		size_hint: 0.05, 0.05
+		pos_hint: {"center_x": 0.05, "center_y": 0.15}
 <SettingsScreen>
 	name: "settings"

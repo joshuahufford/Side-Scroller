@@ -2,46 +2,41 @@
 #:import utils kivy.utils
 
 
-<MainScreen>:
-	name: "main"
-	canvas:
-		Color:
-			rgba: 0,1,0,1
-		Rectangle:
-			pos: self.pos
-			size: self.size
-	Button:
-		on_release: app.root.current = "game"
-		text: "Start"
-		background_color: [0.505,0,0,1]
-		color: utils.get_color_from_hex('#57ff1c')
-		font_size: 60
-		size_hint: 0.3, 0.2
-		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-	Button:
-		on_release: app.root.current = "settings"
-		text: "Settings"
-		background_color: [1,1,1,1]
-		color: [0,0,0,1]
-		font_size: 40
-		size_hint: 0.2, 0.1
-		pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+<ScrollerGame>:
+	player: _player
+	obstical1: _obstical1
 
-<GameScreen>:
-	name: "game"
 	canvas:
 		Color:
-			rgba: 1,1,1,1
+			rgba: 0, 0.5, 0, 1
 		Rectangle:
+			pos: 0, 0
+			size: self.width, 25
+
+	Player:
+		id: _player
+		pos: 0.25 * self.parent.width, 15
+
+	Obstical:
+		id: _obstical1
+		pos: self.parent.center_x - 5 , 15
+
+<Player>:
+	size: 74, 62
+	canvas:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			source: 'assets/ball.png'
 			pos: self.pos
 			size: self.size
-	Image:
-		source: "assets/level_1_ground.png"
-		size: root.size
-		pos_hint: {"center_x": 0.5, "center_y": 0}
-	Image: 
-		source: "assets/circle.png"
-		size_hint: 0.05, 0.05
-		pos_hint: {"center_x": 0.05, "center_y": 0.15}
-<SettingsScreen>
-	name: "settings"
+
+<Obstical>
+	size: 100, 100
+	canvas:
+		Color:
+			rgba: 1, 1, 1, 1
+		Rectangle:
+			source: 'assets/white_cloud.png'
+			pos: self.pos
+			size: self.size

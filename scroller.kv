@@ -22,14 +22,13 @@
 		pos: self.parent.center_x - 5 , 15
 
 <Player>:
-	size: 74, 62
-	canvas:
-		Color:
-			rgba: 1, 1, 1, 1
-		Rectangle:
-			source: 'assets/ball.png'
-			pos: self.pos
-			size: self.size
+    size: 25, 25 
+    canvas:
+    	Color:
+    		rgba: 0, 0, 1, 1
+        Ellipse:
+            size: self.size
+            pos: self.pos  
 
 <Obstical>
 	size: 100, 100

@@ -14,9 +14,9 @@ class ScrollerGame(Widget):
 
 	def update(self, dt):
 		if self.player.y < self.y:  # If ball touches the bottom of screen
-			self.player.velocity_y = 0
+			self.player.velocity_y += 0.01 * 1.0001
 		else:
-			self.player.velocity_y = -1
+			self.player.velocity_y -= 0.01 * 1.0001
 		self.player.move(dt)
 		self.obstical1.scroll(self.player.velocity_x)
 		print(self.player.pos)
@@ -56,7 +56,7 @@ class Obstical(Widget):
 class ScrollerApp(App):
 	def build(self):
 		game = ScrollerGame()
-		Clock.schedule_interval(game.update, 1.0/30.0)
+		Clock.schedule_interval(game.update, 1.0/60.0)
 		return game
 
 if __name__ == '__main__':

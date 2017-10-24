@@ -14,7 +14,7 @@ class ScrollerGame(Widget):
 
 	def update(self, dt):
 		if self.player.y < self.y:  # If ball touches the bottom of screen
-			self.player.velocity_y += 0.01 * 1.0001
+			self.player.velocity_y = 0
 		else:
 			self.player.velocity_y -= 0.01 * 1.0001
 		self.player.move(dt)
@@ -41,6 +41,7 @@ class Player(Widget):
 		if self.velocity_x > self.MAX_VELOCITY_X:
 			self.velocity_x = self.MAX_VELOCITY_X
 		self.pos = Vector(0, self.velocity_y) + self.pos
+		
 
 
 class Obstical(Widget):

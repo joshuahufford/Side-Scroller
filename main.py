@@ -13,13 +13,11 @@ class ScrollerGame(Widget):
 	obstical1 = ObjectProperty(None)
 
 	def update(self, dt):
-		if self.player.y < self.y:  # If ball touches the bottom of screen
-			self.player.velocity_y = 0
-		else:
-			self.player.velocity_y -= 0.01 * 1.0001
-		self.player.move(dt)
+		self.player.bounce_player(self.obstical1, self.player)
+
+		self.player.move(dt, self.width, self.height)
 		self.obstical1.scroll(self.player.velocity_x)
-		print(self.player.pos)
+		# print(self.player.pos)
 
 	def on_touch_down(self, touch):
 		if touch.x >= self.player.center_x:
@@ -35,13 +33,21 @@ class Player(Widget):
 	velocity_y = NumericProperty(0)
 	velocity = ReferenceListProperty(velocity_x, velocity_y)
 
-	def move(self, dt):
+	def move(self, dt, screen_width, screen_height):
 		if self.velocity_x > 0:
 			self.velocity_x += 2 * dt
 		if self.velocity_x > self.MAX_VELOCITY_X:
 			self.velocity_x = self.MAX_VELOCITY_X
+
+		if self.pos[1] > screen_height:
+			self.pos = Vector(50, 50)
+			self.velocity = (0, 0)
+
 		self.pos = Vector(0, self.velocity_y) + self.pos
-		
+
+	def bounce_player(self, obstical, player):
+		if self.collide_widget(obstical):
+			player.velocity_y = 2
 
 
 class Obstical(Widget):
@@ -53,6 +59,7 @@ class Obstical(Widget):
 		else:
 			self.pos = Vector(
 				self.parent.width + random.randint(0, self.parent.width), 15)
+
 
 class ScrollerApp(App):
 	def build(self):

@@ -8,18 +8,18 @@
 
 	canvas:
 		Color:
-			rgba: 0, 0.5, 0, 1
+			rgba: 0, 1, 0, 1
 		Rectangle:
 			pos: 0, 0
 			size: self.width, 25
 
 	Player:
 		id: _player
-		pos: 100, 100
+		pos: 50, 50
 
 	Obstical:
 		id: _obstical1
-		pos: self.parent.center_x - 5 , 15
+		pos: self.parent.center_x - 5 , 0
 
 <Player>:
     size: 25, 25
@@ -31,11 +31,17 @@
             pos: self.pos  
 
 <Obstical>
-	size: 100, 100
+	size: 10, 100
 	canvas:
 		Color:
 			rgba: 1, 1, 1, 1
 		Rectangle:
-			source: 'assets/white_cloud.png'
 			pos: self.pos
 			size: self.size
+	canvas.before:
+		PushMatrix
+		Rotate:
+			angle: -45
+			origin: self.center
+	canvas.after:
+		PopMatrix

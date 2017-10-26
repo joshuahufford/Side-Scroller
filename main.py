@@ -13,8 +13,8 @@ class ScrollerGame(Widget):
 	obstical1 = ObjectProperty(None)
 
 	def update(self, dt):
+		print(self.obstical1.mainangle)
 		self.player.bounce_player(self.obstical1, self.player)
-
 		self.player.move(dt, self.width, self.height)
 		self.obstical1.scroll(self.player.velocity_x)
 		# print(self.player.pos)
@@ -47,7 +47,7 @@ class Player(Widget):
 
 	def bounce_player(self, obstical, player):
 		if self.collide_widget(obstical):
-			player.velocity_y = 2
+			player.velocity_y = player.velocity_x
 
 
 class Obstical(Widget):

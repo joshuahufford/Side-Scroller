@@ -20,6 +20,15 @@
 	Obstical:
 		id: _obstical1
 		pos: self.parent.center_x - 5 , 0
+		mainangle: -45
+		canvas.before:
+			PushMatrix
+			Rotate:
+				angle: self.mainangle
+				origin: self.center
+		canvas.after:
+			PopMatrix
+
 
 <Player>:
     size: 25, 25
@@ -38,10 +47,3 @@
 		Rectangle:
 			pos: self.pos
 			size: self.size
-	canvas.before:
-		PushMatrix
-		Rotate:
-			angle: -45
-			origin: self.center
-	canvas.after:
-		PopMatrix

@@ -46,12 +46,18 @@ class Player(Widget):
 
 	def Gravity(self, dt, screen_height):
 
-		self.velocity_y = self.velocity_y+(self.gravity*dt)
+		self.velocity_y = self.velocity_y + (self.gravity*dt)
 
 		self.pos = Vector(0, self.velocity_y) + self.pos
 
-		if self.pos[1] > screen_height or self.pos[1] <0:
+		print(self.velocity_y)
+
+		if self.pos[1] < 0:
 			self.pos[1] = 0
+			self.velocity_y *= -1 * 0.5
+
+		if self.pos[1] > screen_height:
+			self.velocity_y *= -1
 
 	def Collision(self, obstical):
 		if self.collide_widget(obstical):

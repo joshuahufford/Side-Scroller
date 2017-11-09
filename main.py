@@ -11,43 +11,51 @@ from kivy.vector import Vector
 class ScrollerGame(Widget):
 	player = ObjectProperty(None)
 	obstical1 = ObjectProperty(None)
+	counter = 0
 
 	def update(self, dt):
-		print(self.obstical1.mainangle)
-		self.player.bounce_player(self.obstical1, self.player)
-		self.player.move(dt, self.width, self.height)
+		self.player.Collision(self.obstical1)
+		self.player.Move(dt, self.width)
+		self.player.Gravity(dt, self.height)
 		self.obstical1.scroll(self.player.velocity_x)
-		# print(self.player.pos)
+		print(self.player.pos)
 
 	def on_touch_down(self, touch):
-		if touch.x >= self.player.center_x:
+		if self.counter == 0:
 			self.player.velocity_x = 2
+			self.counter += 1
+		else:
+			self.player.velocity_y = 10
+			self.counter += 1
 
-	def on_touch_up(self, touch):
-		if touch.x >= self.player.center_x:
-			self.player.velocity_x = 0
+	# def on_touch_up(self, touch):
+	# 	self.player.initial_velocity_y = 0
 
 class Player(Widget):
 	MAX_VELOCITY_X = 10
 	velocity_x = NumericProperty(0)
 	velocity_y = NumericProperty(0)
 	velocity = ReferenceListProperty(velocity_x, velocity_y)
+	gravity = -20 # Pixels per second
 
-	def move(self, dt, screen_width, screen_height):
-		if self.velocity_x > 0:
-			self.velocity_x += 2 * dt
+	def Move(self, dt, screen_width):
 		if self.velocity_x > self.MAX_VELOCITY_X:
 			self.velocity_x = self.MAX_VELOCITY_X
 
-		if self.pos[1] > screen_height:
-			self.pos = Vector(50, 50)
-			self.velocity = (0, 0)
+		self.pos = Vector(0, self.velocity_y) + self.pos
+
+	def Gravity(self, dt, screen_height):
+
+		self.velocity_y = self.velocity_y+(self.gravity*dt)
 
 		self.pos = Vector(0, self.velocity_y) + self.pos
 
-	def bounce_player(self, obstical, player):
+		if self.pos[1] > screen_height or self.pos[1] <0:
+			self.pos[1] = 0
+
+	def Collision(self, obstical):
 		if self.collide_widget(obstical):
-			player.velocity_y = player.velocity_x
+			self.velocity_x = 0
 
 
 class Obstical(Widget):
@@ -58,7 +66,7 @@ class Obstical(Widget):
 			self.pos = Vector(-1 * scroll_dist, 0) + self.pos
 		else:
 			self.pos = Vector(
-				self.parent.width + random.randint(0, self.parent.width), 15)
+				self.parent.width + random.randint(0, self.parent.width), 0)
 
 
 class ScrollerApp(App):

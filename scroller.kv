@@ -1,49 +1,218 @@
 #:kivy 1.10.0
 #:import utils kivy.utils
 
-
 <ScrollerGame>:
 	player: _player
-	obstical1: _obstical1
 
-	canvas:
-		Color:
-			rgba: 0, 1, 0, 1
+	toppipe1: _toppipe1
+	toppipe2: _toppipe2
+	toppipe3: _toppipe3
+	toppipe4: _toppipe4
+	toppipe5: _toppipe5
+	toppipe6: _toppipe6
+
+	bottompipe1: _bottompipe1
+	bottompipe2: _bottompipe2
+	bottompipe3: _bottompipe3
+	bottompipe4: _bottompipe4
+	bottompipe5: _bottompipe5
+	bottompipe6: _bottompipe6
+	
+	star: _star
+	scorebox: _scorebox
+	highscorebox: _highscorebox
+	startbutton: _startbutton
+	replaybutton: _replaybutton
+
+	canvas.before:
 		Rectangle:
-			pos: 0, 0
-			size: self.width, 25
+			source: 'assets/background.jpeg'
+			size: self.size
+			pos: self.pos
 
 	Player:
 		id: _player
 		pos: 100, 100
 
-	Obstical:
-		id: _obstical1
-		pos: self.parent.center_x - 5 , -50
-		mainangle: 0
+	Pipe:
+		id: _toppipe1
+		pos: 1000, root.height-50
+		size: 100, 300
 		canvas.before:
 			PushMatrix
 			Rotate:
-				angle: self.mainangle
+				angle: 180
 				origin: self.center
 		canvas.after:
 			PopMatrix
 
+	Pipe:
+		id: _toppipe2
+		pos: 1000, root.height-100
+		size: 100, 300
+		canvas.before:
+			PushMatrix
+			Rotate:
+				angle: 180
+				origin: self.center
+		canvas.after:
+			PopMatrix
+
+	Pipe:
+		id: _toppipe3
+		pos: 1000, root.height-150
+		size: 100, 300
+		canvas.before:
+			PushMatrix
+			Rotate:
+				angle: 180
+				origin: self.center
+		canvas.after:
+			PopMatrix
+	
+	Pipe:
+		id: _toppipe4
+		pos: 1000, root.height-200
+		size: 100, 300
+		canvas.before:
+			PushMatrix
+			Rotate:
+				angle: 180
+				origin: self.center
+		canvas.after:
+			PopMatrix
+
+	Pipe:
+		id: _toppipe5
+		pos: 1000, root.height-250
+		size: 100, 300
+		canvas.before:
+			PushMatrix
+			Rotate:
+				angle: 180
+				origin: self.center
+		canvas.after:
+			PopMatrix
+	
+	Pipe:
+		id: _toppipe6
+		pos: 1000, root.height-300
+		size: 100, 300
+		canvas.before:
+			PushMatrix
+			Rotate:
+				angle: 180
+				origin: self.center
+		canvas.after:
+			PopMatrix
+
+	
+	Pipe:
+		id: _bottompipe1
+		pos: 1000, -250
+		size: 100, 300
+
+	Pipe:
+		id: _bottompipe2
+		pos: 1000, -200
+		size: 100, 300
+
+	Pipe:
+		id: _bottompipe3
+		pos: 1000, -150
+		size: 100, 300
+
+	Pipe:
+		id: _bottompipe4
+		pos: 1000, -100
+		size: 100, 300
+
+	Pipe:
+		id: _bottompipe5
+		pos: 1000, -50
+		size: 100, 300
+
+	Pipe:
+		id: _bottompipe6
+		pos: 1000, 0
+		size: 100, 300
+
+
+	Star:
+		id: _star
+		pos: 1000, 300
+		size: 15, 15
+
+	ScoreBox:
+		id: _scorebox
+
+	HighScoreBox:
+		id: _highscorebox
+
+	StartButton:
+		id: _startbutton
+
+	ReplayButton:
+		id: _replaybutton
 
 <Player>:
-    size: 20, 20
-    canvas:
-    	Color:
-    		rgba: 0, 0, 1, 1
-        Ellipse:
-            size: self.size
-            pos: self.pos  
+	size: 30, 30
+	Image:
+		size: self.size
+		pos: root.pos
+		source: 'assets/player.gif'
+		anim_delay: root.anim_delay
+		anim_loop: root.anim_loop
 
-<Obstical>
-	size: 10, 100
+
+
+<Pipe>:
 	canvas:
 		Color:
 			rgba: 1, 1, 1, 1
 		Rectangle:
+			source: 'assets/longtube.png'
 			pos: self.pos
 			size: self.size
+
+<Star>:
+	size: self.size
+	Image:
+		size: self.size
+		pos: root.pos
+		source: 'assets/star.gif'
+		anim_delay: 0.1
+
+<ScoreBox>:
+	Label:
+		text: root.text
+		color: 0, 0, 0, 1
+		font_size: '50sp'
+		pos: 835, 500
+		size: 100, 100
+
+<HighScoreBox>:
+	Label:
+		text: root.text
+		color: 0, 0, 0, 1
+		font_size: '50sp'
+		pos: 775, 400
+		size: 100, 100
+
+<StartButton>
+	text: root.text
+	color: 1, 1, 0, 1
+	background_color: (0.0, 1.0, 1.0, 0.4)
+	font_size: '50sp'
+	pos: 500-(self.width/2), 300-(self.height/2)
+	size: 200, 100
+
+<ReplayButton>
+	text: root.text
+	color: 1, 1, 0, 1
+	background_color: (0.0, 1.0, 1.0, 0.4)
+	font_size: '50sp'
+	pos: 1000, 600
+	size: 300, 100
+
+
